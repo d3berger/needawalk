@@ -1,10 +1,17 @@
 <?php
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    echo 'There was an error processing your request. Please try again.';
     exit;
 }
 
-if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['interest'])) {
+if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['interest']) || empty($_POST['CSRFToken']) || empty($_SESSION['CSRFToken'])) {
+    echo 'There was an error processing your request. Please try again.';
+    exit;
+}
+
+if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'] || $_SERVER['HTTP_REFERER'] != 'http://needawalk.com/') {
     echo 'There was an error processing your request. Please try again.';
     exit;
 }

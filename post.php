@@ -1,47 +1,52 @@
 <?php
 session_start();
 
+$error = false;
+
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    echo 'There was an error processing your request. Please try again.';
-    exit;
+    $error = true;
 }
 
 if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['interest']) || empty($_POST['CSRFToken']) || empty($_SESSION['CSRFToken'])) {
-    echo 'There was an error processing your request. Please try again.';
-    exit;
+    $error = true;
 }
 
-if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'] || $_SERVER['HTTP_REFERER'] != 'http://needawalk.com/') {
-    echo 'There was an error processing your request. Please try again.';
-    exit;
+if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'] || strpos($_SERVER['HTTP_REFERER'], 'http://needawalk.com/') === false) {
+    $error = true;
 }
 
 try {
-    $dbh = new PDO("mysql:dname=dogs;host=localhost", 'dogs_user', 'dogwalker22');
+    require_once('db.php');
+    global $dbname, $host, $user, $pass;
+    $dbh = new PDO("mysql:dname=$dbname;host=$host", $user, $pass);
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    $error = true;
 }
 
-$q = <<<Q
+if ($error == true) {
+    echo 'There was an error processing your request. Please try again.';
+    exit;
+}
+
+$insertQuery = <<<QUERY
 INSERT INTO `dogs`.`signup` 
 (`name`, `email`, `interest`, `state`, `city`, `zip`) 
 VALUES 
 (:name, :email, :interest, :state, :city, :zip)
-Q;
+QUERY;
 
-$sth = $dbh->prepare($q);
-$data = array();
-$r = $sth->execute(array('name' => $_POST['name'],
-    'email'=>$_POST['email'],
+$sth = $dbh->prepare($insertQuery);
+$result = $sth->execute(array('name' => $_POST['name'],
+    'email' => $_POST['email'],
     'interest' => $_POST['interest'],
     'state' => $_POST['state'],
     'city' => $_POST['city'],
     'zip' => $_POST['zip']));
 
-if ($r === true) {
+if ($result === true) {
     echo 'We received your request. Thank you.';
 } else {
-    echo 'Please try again';
+    echo 'Sorry that email is already taken.';
 }
 
 

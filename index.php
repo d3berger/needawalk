@@ -6,6 +6,7 @@ $_SESSION['CSRFToken'] = $token;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Need a walk</title>
+    <link rel="stylesheet" type="text/css" href="form.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="jquery.form.min.js"></script>
     <script src="jquery.validate.min.js"></script>
@@ -17,58 +18,6 @@ $_SESSION['CSRFToken'] = $token;
             });
         });
     </script>
-
-    <style type="text/css">
-    form.signup
-    {
-        background-color: #f3f3f3;
-        border: solid 1px #a1a1a1;
-        padding: 10px;
-        width: 300px;
-    }
-    
-    form.signup input[type=text]
-    {
-        width: 150px;
-        margin-bottom: 10px;
-    }
- 
-    label {
-        float: left;
-        margin-bottom: 10px;
-    }
-
-    label.title
-    {
-        text-align: right;
-        padding-right: 20px;
-        width: 70px;
-    }
-
-    label.error {
-        padding-left: 90px;
-        color: red;
-    }
-
-    .heading {
-        font-size: 18px;
-        padding: 10px;
-    }
-
-    div {
-        clear: both;
-    }
-
-    div.submit {
-        text-align: right;
-    }
-
-    #output {
-        color: green;
-        padding: 10px;
-    }
-
-    </style>
 </head>
 <body>
     <div class="heading">Please signup below for more information</div>
@@ -76,11 +25,11 @@ $_SESSION['CSRFToken'] = $token;
         <input type="hidden" name="CSRFToken" value="<?php echo $token; ?>" />
         <div>
                 <label class="title">Name</label>
-                <input type="text" name="name" placeholder="User Name" required />
+                <input type="text" name="name" placeholder="First and Last name" required />
         </div>
         <div>
                 <label class="title">Email</label>
-                <input type="text" name="email" placeholder="Email Address" required />
+                <input type="email" name="email" placeholder="Email Address" required />
         </div>
         <div>
                 <label class="title">Interest</label>

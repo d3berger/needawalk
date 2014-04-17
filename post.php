@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     $error = true;
 }
 
-if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['interest']) || empty($_POST['CSRFToken']) || empty($_SESSION['CSRFToken'])) {
+if (empty($_POST['fname']) || empty($_POST['email']) || empty($_POST['interest']) || empty($_POST['CSRFToken']) || empty($_SESSION['CSRFToken'])) {
     $error = true;
 }
 
@@ -36,7 +36,7 @@ VALUES
 QUERY;
 
 $sth = $dbh->prepare($insertQuery);
-$result = $sth->execute(array('name' => $_POST['name'],
+$result = $sth->execute(array('name' => "{$_POST['fname']} {$_POST['lname']}",
     'email' => $_POST['email'],
     'interest' => $_POST['interest'],
     'state' => $_POST['state'],

@@ -15,45 +15,8 @@ $_SESSION['CSRFToken'] = $token;
 
     <title>Need a walk</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <style>
-    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-      color: #fff;
-      background-color: #123456;
-      border-color: #123456;
-    }
-    .fifty {
-      width: 49%;
-      float: left;
-    }
-    input.form-control {
-      margin: 10px 0px 10px 0px;
-    }
-    input.error {
-      border: 1px solid #FF0000 !important
-    }
-    .form-signup {
-      max-width: 400px;
-      margin: 0 auto 30px auto;
-    }
-    .center {
-      width: 400px;
-      margin: 30px auto 0px auto;
-    }
-    .space {
-      width: 2%;
-      float: left;
-    }
-    .white {
-      color: white;
-    }
-    .red {
-      color: red;
-    }
-    </style>
+    <link href="css/index.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -72,11 +35,11 @@ $_SESSION['CSRFToken'] = $token;
       </div>
       <form id="signupForm" class="form-signup" role="form" method="post" action="post.php">
         <input type="hidden" name="CSRFToken" value="<?php echo $token; ?>" />
-        <input type="text" class="form-control fifty required" name="fname" placeholder="First Name">
+        <input type="text" class="form-control fifty" name="fname" placeholder="First Name">
         <span class="space">&nbsp;</span>
-        <input type="text" class="form-control fifty required" name="lname" placeholder="Last Name">
-        <input type="email" class="form-control required email" id="email" name="email" placeholder="Your email address">
-        <input type="text" class="form-control required" equalTo="#email" name="emailConfirm" placeholder="Re-enter email address">
+        <input type="text" class="form-control fifty" name="lname" placeholder="Last Name">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Your email address">
+        <input type="text" class="form-control" name="emailConfirm" placeholder="Re-enter email address">
         <div class="btn-group btn-group-justified" data-toggle="buttons">
           <label class="btn btn-primary active">
             <input type="radio" class="required" name="interest" value="1" checked="checked">Dog Owner
@@ -94,43 +57,14 @@ $_SESSION['CSRFToken'] = $token;
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
         <h4 id="output" class="white"></h4>
       </form>
-        
 
-    </div> <!-- /container -->
+    </div>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/jquery.form.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#signupForm").validate({
-              invalidHandler: function(e, validator) {
-                var errors = validator.numberOfInvalids();
-                if (errors) {
-                  var message = errors == 1
-                    ? 'You missed 1 field. It has been highlighted below'
-                    : 'You missed ' + errors + ' fields.  They have been highlighted below';
-                  $("#error").html(message);
-                  $("div.error").show();
-                } else {
-                  $("div.error").hide();
-                }
-              },
-              errorPlacement: function(error,element) {
-                return true;
-              }
-            });
-            $("#signupForm").ajaxForm({
-                target: '#output'
-            });
-            $('.btn').button();
-        });
-    </script>
+    <script src="js/index.js"></script>
 
   </body>
 </html>

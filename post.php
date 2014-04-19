@@ -11,7 +11,7 @@ if (empty($_POST['fname']) || empty($_POST['email']) || empty($_POST['interest']
     $error = true;
 }
 
-if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'] || strpos($_SERVER['HTTP_REFERER'], 'http://needawalk.com/') === false) {
+if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'] || strpos($_SERVER['HTTP_REFERER'], 'needawalk.com') === false) {
     $error = true;
 }
 
